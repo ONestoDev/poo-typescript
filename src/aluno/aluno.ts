@@ -1,13 +1,32 @@
-import Pessoa = require("./pessoa");
-import Endereco = require("./endereco");
-import Projeto = require("./projeto");
+import Pessoa = require("../pessoa/pessoa");
+import Endereco = require("../endereco/endereco");
+import Projeto = require("../projeto/projeto");
 
 class Aluno extends Pessoa implements Projeto {
 
     //Atributos de Instância//
 
-    curso: string;
-    situacao: SituacaoAluno; //Assosciação Estrutural - Composição - A partir de atributo.
+    private _curso: string = "";
+    private _situacao: SituacaoAluno = SituacaoAluno.MATRICULADO; //Assosciação Estrutural - Composição - A partir de atributo.
+
+
+    //Gets e Sets//
+
+    public get curso(): string {
+        return this._curso;
+    }
+
+    public set curso(value: string) {
+        this._curso = value;
+    }
+
+    public get situacao(): SituacaoAluno {
+        return this._situacao;
+    }
+
+    public set situacao(value: SituacaoAluno) {
+        this._situacao = value;
+    }
 
     //Construtor//
 
@@ -23,7 +42,7 @@ class Aluno extends Pessoa implements Projeto {
     //O método gerarMatricula é uma sobrescrita (Override)
     //A implementaçãi di método gerarMatricula na classa Aluno sobrescreve o método abstrato definido na classe Pessoa
     //Associação Comportamental - Dependência da Classe Aluno com as classes Date e Math
-    gerarMatricula(): number {
+    protected gerarMatricula(): number {
         let ano: number = new Date().getFullYear();
         let numero: number = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000; // Gera um número aleatório de 4 dígitos
         return Number(`${ano}${numero}`);

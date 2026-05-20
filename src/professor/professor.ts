@@ -1,12 +1,21 @@
-import Pessoa = require("./pessoa");
-import Endereco = require("./endereco");
-import Projeto = require("./projeto");
+import Pessoa = require("../pessoa/pessoa");
+import Endereco = require("../endereco/endereco");
+import Projeto = require("../projeto/projeto");
 
 class Professor extends Pessoa implements Projeto {
 
     //Atributos de Instância//
 
-    salario: number;
+    private _salario: number = 0;
+
+    //Gets e Sets//
+
+    public get salario(): number {
+        return this._salario;
+    }
+    public set salario(value: number) {
+        this._salario = value;
+    }
 
     //Construtor//
 
@@ -21,15 +30,15 @@ class Professor extends Pessoa implements Projeto {
     //O método gerarMatricula é uma sobrescrita (Override)
     //A implementaçãi di método gerarMatricula na classa Aluno sobrescreve o método abstrato definido na classe Pessoa
     //Associação Comportamental - Dependência da Classe Aluno com as classes Date e Math
-    gerarMatricula(): number {
+    protected gerarMatricula(): number {
         return Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000; // Gera um número aleatório de 8 dígitos
     }
 
-    submeterProjetoPesquisa(): void {
+    public submeterProjetoPesquisa(): void {
         console.log("Isso é uma submissão de projeto de pesquisa de professor"); // Implementação específica para submeter projeto de pesquisa
     }
 
-    submeterProjetoExtensao(): void {
+    public submeterProjetoExtensao(): void {
         console.log("Isso é uma submissão de projeto de extensão de professor"); // Implementação específica para submeter projeto de extensão
     }
 }
