@@ -7,6 +7,7 @@ class Professor extends Pessoa implements Projeto {
     //Atributos de Instância//
 
     private _salario: number = 0;
+    private _campusLotacao: string = "";
 
     //Gets e Sets//
 
@@ -17,12 +18,21 @@ class Professor extends Pessoa implements Projeto {
         this._salario = value;
     }
 
+    public get campusLotacao(): string {
+        return this._campusLotacao;
+    }
+
+    public set campusLotacao(value: string) {
+        this._campusLotacao = value;
+    }
+
     //Construtor//
 
-    constructor(nome: string, sobrenome: string, sexo: string, CPF: string, idade: number, brasileiro: boolean, enderecos: Endereco[], salario: number) {
+    constructor(nome: string, sobrenome: string, sexo: string, CPF: string, idade: number, brasileiro: boolean, enderecos: Endereco[], salario: number, campusLotacao: string) {
         super(nome, sobrenome, sexo, CPF, idade, brasileiro, enderecos);
         this.matricula = this.gerarMatricula(); // A matrícula é gerada automaticamente ao criar um novo professor
         this.salario = salario;
+        this.campusLotacao = campusLotacao;
     }
 
     //Métodos de Instância//

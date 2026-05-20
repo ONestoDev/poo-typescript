@@ -1,39 +1,40 @@
 import Pessoa = require("../pessoa/pessoa");
 import Endereco = require("../endereco/endereco");
+import Curso = require("../curso/curso");
 import Projeto = require("../projeto/projeto");
 
 class Aluno extends Pessoa implements Projeto {
 
     //Atributos de Instância//
 
-    private _curso: string = "";
-    private _situacao: SituacaoAluno = SituacaoAluno.MATRICULADO; //Assosciação Estrutural - Composição - A partir de atributo.
+    private _cursos: Curso[] = [];
+    private _situacao: string = "Matriculado"; //Assosciação Estrutural - Composição - A partir de atributo.
 
 
     //Gets e Sets//
 
-    public get curso(): string {
-        return this._curso;
+    public get cursos(): Curso[] {
+        return this._cursos;
     }
 
-    public set curso(value: string) {
-        this._curso = value;
+    public set cursos(value: Curso[]) {
+        this._cursos = value;
     }
 
-    public get situacao(): SituacaoAluno {
+    public get situacao(): string {
         return this._situacao;
     }
 
-    public set situacao(value: SituacaoAluno) {
+    public set situacao(value: string) {
         this._situacao = value;
     }
 
     //Construtor//
 
-    constructor(nome: string, sobrenome: string, sexo: string, CPF: string, idade: number, brasileiro: boolean, enderecos: Endereco[], curso: string, situacao: SituacaoAluno) {
+    constructor(nome: string, sobrenome: string, sexo: string, CPF: string, idade: number, brasileiro: boolean, enderecos: Endereco[], cursos: Curso[], situacao: string) {
         super(nome, sobrenome, sexo, CPF, idade, brasileiro, enderecos);
         this.matricula = this.gerarMatricula(); // A matrícula é gerada automaticamente ao criar um novo aluno
-        this.curso = curso;
+        this.cursos = cursos;
         this.situacao = situacao;
     }
 
@@ -58,13 +59,4 @@ class Aluno extends Pessoa implements Projeto {
 
 }
 
-enum SituacaoAluno {
-    ATIVO = "Ativo",
-    MATRICULADO = "Matriculado",
-    TRANCADO = "Trancado",
-    CONCLUIDO = "Concluído",
-    CANCELADO = "Cancelado",
-    FORMANDO = "Formando"
-}
-
-export = Aluno; SituacaoAluno;
+export = Aluno;
